@@ -42,6 +42,7 @@ function createLinksForCollections(model, serverName) {
     characters: 'people',
     films: 'films',
     residents: 'people',
+    people: 'people',
     pilots: 'people',
     planets: 'planets',
     starships: 'starships',
