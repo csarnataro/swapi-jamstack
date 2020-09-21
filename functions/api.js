@@ -1,15 +1,15 @@
 const serverless = require('serverless-http');
 const express = require('express');
-const responseTimeMiddleware = require('../lib/response-time-middleware');
-const { all, single } = require('../lib/load-entities');
-const mergeVehiclesWithTransport = require('../lib/merge-vehicles-with-transport');
-const films = require('../../data/films.json');
-const people = require('../../data/people.json');
-const species = require('../../data/species.json');
-const planets = require('../../data/planets.json');
-const vehiclesTable = require('../../data/vehicles.json');
-const starshipsTable = require('../../data/starships.json');
-const transportsTable = require('../../data/transport.json');
+const responseTimeMiddleware = require('./lib/response-time-middleware');
+const { all, single } = require('./lib/load-entities');
+const mergeVehiclesWithTransport = require('./lib/merge-vehicles-with-transport');
+const films = require('../data/films.json');
+const people = require('../data/people.json');
+const species = require('../data/species.json');
+const planets = require('../data/planets.json');
+const vehiclesTable = require('../data/vehicles.json');
+const starshipsTable = require('../data/starships.json');
+const transportsTable = require('../data/transport.json');
 
 const vehicles = mergeVehiclesWithTransport({
   allVehicles: vehiclesTable,
