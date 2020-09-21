@@ -13,7 +13,14 @@ function all({ prefix, entities, backlinks }) {
         serverName,
         backlinks,
       }));
-      const resultPage = buildResultPage(transformedModels, serverName, Number(pageNumber));
+      const resultPage = buildResultPage(
+        {
+          prefix,
+          models: transformedModels,
+          serverName,
+          pageNumber: Number(pageNumber),
+        },
+      );
       res.json(resultPage);
       res.end();
     } catch (e) {
@@ -25,8 +32,6 @@ function all({ prefix, entities, backlinks }) {
         res.json({ detail: e.message });
       }
     }
-
-    res.json();
   };
 }
 
