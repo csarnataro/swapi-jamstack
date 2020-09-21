@@ -1,12 +1,12 @@
 # SWAPI serverless
 
-> Port of [swapi.dev](https://swapi.dev) JSON API in JavaScript as serverless functions
+> A porting of [swapi.dev](https://swapi.dev) JSON API in JavaScript as serverless functions
 
-## Goals
-Port the whole [swapi.dev](https://swapi.dev) (originally [swapi.co](swapi.co), not working anymore) site in JavaScript as a JamStack site.
+### Goals
+Port the whole [swapi.dev](https://swapi.dev) site, (previously known as [swapi.co](swapi.co), not maintained anymore) as a JamStack site, with some back-end logic as serverless lambda functions
 
 
-
+### How to test locally
 Test locally with:
 ```
 NODE_ENV=local node ./test-rest-api-locally.js

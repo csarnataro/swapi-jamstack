@@ -1,7 +1,7 @@
 {
   "name": "swapi-serverless",
   "version": "1.0.0",
-  "description": "Porting of swapi.dev (previously known as swapi.co) to serverless js functions",
+  "description": "A porting of swapi.dev (previously known as swapi.co) to serverless js functions",
   "main": "index.js",
   "scripts": {
     "test": "jest"
