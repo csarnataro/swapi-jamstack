@@ -68,8 +68,26 @@ app.get('/api/people/:id',
 // app.get('/api/planets', all('planets'));
 // app.get('/api/planets/:id', single('planets'));
 
-// app.get('/api/species', all('species'));
-// app.get('/api/species/:id', single('species'));
+app.get('/api/species', all({
+  prefix: 'species',
+  entities: species,
+  backlinks: {
+    films: {
+      collection: films,
+      field: 'species',
+    },
+  },
+}));
+app.get('/api/species/:id', single({
+  prefix: 'species',
+  entities: species,
+  backlinks: {
+    films: {
+      collection: films,
+      field: 'species',
+    },
+  },
+}));
 
 app.get('/api/starships', all({
   prefix: 'starships',
