@@ -1,3 +1,33 @@
 [build]
   command = "npm install"
   functions = "src/functions"
+
+[[redirects]]
+  from = "/api/films/"
+  to = "/.netlify/functions/api/films/"
+  status = 200
+
+[[redirects]]
+  from = "/api/films"
+  to = "/.netlify/functions/api/films/"
+  status = 200
+
+[[redirects]]
+  from = "/api/films/*"
+  to = "/.netlify/functions/api/films/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/api/people/"
+  to = "/.netlify/functions/api/people/"
+  status = 200
+
+[[redirects]]
+  from = "/api/people"
+  to = "/.netlify/functions/api/people/"
+  status = 200
+
+[[redirects]]
+  from = "/api/people/*"
+  to = "/.netlify/functions/api/people/:splat"
+  status = 200
