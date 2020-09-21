@@ -45,6 +45,7 @@ function createLinksForCollections(model, serverName) {
     people: 'people',
     pilots: 'people',
     planets: 'planets',
+    homeworld: 'planets',
     starships: 'starships',
     vehicles: 'vehicles',
     species: 'species',
@@ -57,6 +58,17 @@ function createLinksForCollections(model, serverName) {
     }
   });
   return model;
+}
+
+function createLinksForHomeWorld(model, serverName) {
+  const prefixesMap = {
+    homeworld: 'planets',
+  };
+  if (model.homeworld) {
+    // homeworld is the only known case of a 1-to-n association
+    // eslint-disable-next-line no-param-reassign
+    model.homeworld = concatenate(serverName, 'homeworld', prefixesMap)(model.homeworld);
+  }
 }
 
 function createLinkForModel({ prefix, entityId, serverName }) {
@@ -97,8 +109,17 @@ function getModelFromDbEntity({
     backlinksFields.forEach((collectionToSearch) => {
       const { collection, field } = backlinks[collectionToSearch];
       const rightItems = collection.filter(
-        (backlink) => backlink.fields[field]
-          && backlink.fields[field].includes(Number(entity.pk)),
+        (backlink) => {
+          if (backlink.fields[field]) {
+            if (Array.isArray(backlink.fields[field])) {
+              return backlink.fields[field].includes(Number(entity.pk));
+            }
+            if (field === 'homeworld') {
+              return backlink.fields[field] === Number(entity.pk);
+            }
+          }
+          return false;
+        },
       );
       model[collectionToSearch] = rightItems.map((film) => film.pk);
     });
@@ -106,6 +127,11 @@ function getModelFromDbEntity({
 
   // must be called on the final enriched and transformed model
   createLinksForCollections(model, serverName);
+
+  // species and people need a custom link for "homeworld"
+  if (prefix === 'species' || prefix === 'people') {
+    createLinksForHomeWorld(model, serverName);
+  }
 
   return model;
 }
