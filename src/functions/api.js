@@ -6,6 +6,7 @@ const mergeVehiclesWithTransport = require('../lib/merge-vehicles-with-transport
 const films = require('../../data/films.json');
 const people = require('../../data/people.json');
 const species = require('../../data/species.json');
+const planets = require('../../data/planets.json');
 const vehiclesTable = require('../../data/vehicles.json');
 const starshipsTable = require('../../data/starships.json');
 const transportsTable = require('../../data/transport.json');
@@ -65,8 +66,34 @@ app.get('/api/people/:id',
     backlinks: peopleBacklinks,
   }));
 
-// app.get('/api/planets', all('planets'));
-// app.get('/api/planets/:id', single('planets'));
+app.get('/api/planets', all({
+  prefix: 'planets',
+  entities: planets,
+  backlinks: {
+    films: {
+      collection: films,
+      field: 'planets',
+    },
+    residents: {
+      collection: people,
+      field: 'homeworld',
+    },
+  },
+}));
+app.get('/api/planets/:id', single({
+  prefix: 'planets',
+  entities: planets,
+  backlinks: {
+    films: {
+      collection: films,
+      field: 'planets',
+    },
+    residents: {
+      collection: people,
+      field: 'homeworld',
+    },
+  },
+}));
 
 app.get('/api/species', all({
   prefix: 'species',
