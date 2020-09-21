@@ -1,6 +1,14 @@
 const { PAGE_SIZE } = require('./contants');
 const getPage = require('./get-page');
 
+function createPageLink({
+  serverName,
+  prefix,
+  pageNumber,
+}) {
+  return `${serverName}/api/${prefix}?page=${pageNumber}`;
+}
+
 /**
  * Builds the result page considering pagination.
  * ```
@@ -16,7 +24,12 @@ const getPage = require('./get-page');
  * @param {Number} pageNumber current page number (1-based)
  * @returns {*} an object as described above
  */
-function buildResultPage(models, serverName, pageNumber) {
+function buildResultPage({
+  prefix,
+  models,
+  serverName,
+  pageNumber,
+}) {
   const count = models.length;
 
   let previous = null;
@@ -24,11 +37,19 @@ function buildResultPage(models, serverName, pageNumber) {
 
   const resultPage = getPage(models, pageNumber);
   if (pageNumber !== 1) {
-    previous = pageNumber - 1;
+    previous = createPageLink({
+      serverName,
+      prefix,
+      pageNumber: pageNumber - 1,
+    });
   }
 
   if (resultPage.length >= PAGE_SIZE) {
-    next = pageNumber + 1;
+    next = createPageLink({
+      serverName,
+      prefix,
+      pageNumber: pageNumber + 1,
+    });
   }
 
   const result = {
