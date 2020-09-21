@@ -4,6 +4,9 @@
   "description": "A porting of swapi.dev (previously known as swapi.co) to serverless js functions",
   "main": "index.js",
   "scripts": {
+    "dev": "next dev & NODE_ENV=local nodemon ./test-rest-api-locally.js",
+    "build": "next build",
+    "start": "next start",
     "test": "jest"
   },
   "dependencies": {
@@ -11,6 +14,9 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-graphql": "^0.9.0",
+    "next": "^9.5.3",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "serverless-http": "^2.3.2"
   },
   "repository": {
@@ -25,9 +31,10 @@
   },
   "homepage": "https://github.com/csarnataro/swapi-serverless#readme",
   "devDependencies": {
-    "eslint": "^7.0.0",
+    "eslint": "^7.9.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-react": "^7.20.6",
     "jest": "^26.0.1",
     "nodemon": "^2.0.4"
   }

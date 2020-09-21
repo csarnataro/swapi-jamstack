@@ -2,7 +2,7 @@
  * E.g.
  * $ NODE_ENV=local node test-graphql-locally.js
  */
-const app = require('./src/functions/api').handler;
+const app = require('./functions/api').handler;
 
 const port = 4000;
 
