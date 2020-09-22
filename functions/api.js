@@ -10,6 +10,7 @@ const planets = require('../data/planets.json');
 const vehiclesTable = require('../data/vehicles.json');
 const starshipsTable = require('../data/starships.json');
 const transportsTable = require('../data/transport.json');
+const getServerName = require('./lib/get-server-name');
 
 const vehicles = mergeVehiclesWithTransport({
   allVehicles: vehiclesTable,
@@ -157,6 +158,24 @@ app.get('/api/vehicles/:id', single({
     },
   },
 }));
+
+app.get('/api', (req, res) => {
+  res.json([
+    'people',
+    'planets',
+    'films',
+    'species',
+    'vehicles',
+    'starships',
+  ].reduce(
+    (accumulator, prefix) => (
+      {
+        ...accumulator,
+        [prefix]: `${getServerName(req)}/api/${prefix}`,
+      }),
+    {}, // <- initial value
+  ));
+});
 
 app.get('/*', catchAll);
 
