@@ -48,7 +48,7 @@ function allPeople(req, res) {
 }
 
 function singlePerson(req, res) {
-  single({ params })(req, res);
+  single(params)(req, res);
 }
 
 module.exports = {
