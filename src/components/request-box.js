@@ -37,7 +37,7 @@ function RequestBox() {
         <div className="relative overflow-hidden mb-8">
           <div className="rounded overflow-hidden border border-gray-400 p-4">
             <div className="overscroll-auto overflow-auto h-64 bg-gray-300 text-gray-700 p-4">
-              <pre id="interactive_output" className="overscroll-auto text-sm">
+              <pre className="overscroll-auto text-sm">
                 {`{
     "name": "Luke Skywalker",
     "height": "172",
