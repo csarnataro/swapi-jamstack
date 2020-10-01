@@ -1,7 +1,8 @@
 import React from 'react';
-import Link from 'next/link';
+import PropTypes from 'prop-types';
+import NavigationItem from './navigation-item';
 
-function Navigation() {
+function Navigation({ currentPage }) {
   return (
     <div className="bg-gray-800 border-gray-900 border-b">
       <nav className="bg-gray-800 container mx-auto">
@@ -58,25 +59,27 @@ function Navigation() {
               </div>
               <div className="hidden sm:block sm:ml-6">
                 <div className="flex">
-                  <Link href="/" alt="Link to home page">
-                    <a
-                      href="#"
-                      className="px-3 py-2 rounded-md text-sm font-medium leading-5 text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
-                    >
-                      Home
-                    </a>
-                  </Link>
-                  <Link href="/about" alt="Link to about page">
-                    <a className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">
-                      About
-                    </a>
-                  </Link>
-                  <a
-                    href="#"
-                    className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
+                  <NavigationItem
+                    href="/"
+                    alt="Link to home page"
+                    isActive={currentPage === 'index'}
+                  >
+                    Home
+                  </NavigationItem>
+                  <NavigationItem
+                    href="/about"
+                    alt="Link to about page"
+                    isActive={currentPage === 'about'}
+                  >
+                    About
+                  </NavigationItem>
+                  <NavigationItem
+                    href="/documentation"
+                    alt="Link to documentation page"
+                    isActive={currentPage === 'documentation'}
                   >
                     Documentation
-                  </a>
+                  </NavigationItem>
                 </div>
               </div>
             </div>
@@ -120,5 +123,9 @@ function Navigation() {
     </div>
   );
 }
+
+Navigation.propTypes = {
+  currentPage: PropTypes.string,
+};
 
 export default Navigation;

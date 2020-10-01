@@ -1,0 +1,35 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import Link from 'next/link';
+
+const activeClass = 'text-white bg-gray-900 focus:bg-gray-700';
+const inactiveClass = 'text-gray-300 hover:text-white hover:bg-gray-700 focus:bg-gray-700';
+
+function NavigationItem({
+  children, href, alt, isActive,
+}) {
+  return (
+    <Link href={href}>
+      <a
+        alt={alt}
+        className={`${
+          isActive ? activeClass : inactiveClass
+        } px-3 py-2 rounded-md text-sm font-medium leading-5  focus:outline-none transition duration-150 ease-in-out`}
+      >
+        {children}
+      </a>
+    </Link>
+  );
+}
+
+NavigationItem.propTypes = {
+  href: PropTypes.string,
+  alt: PropTypes.string,
+  isActive: PropTypes.bool,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
+};
+
+export default NavigationItem;
