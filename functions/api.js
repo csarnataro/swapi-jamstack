@@ -1,5 +1,6 @@
 const serverless = require('serverless-http');
 const express = require('express');
+const cors = require('cors');
 const responseTimeMiddleware = require('./lib/response-time-middleware');
 const { allFilms, singleFilm } = require('./handlers/films');
 const { allPeople, singlePerson } = require('./handlers/people');
@@ -11,6 +12,7 @@ const { allVehicles, singleVehicle } = require('./handlers/vehicles');
 
 const app = express();
 
+app.use(cors());
 app.use(responseTimeMiddleware);
 
 app.get('/api', allResources);

@@ -1,6 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
-function RequestBox() {
+function RequestBox({ initialCode }) {
+  const [code, setCode] = useState();
+  const [currentRequest, setCurrentRequest] = useState();
+
+  useEffect(() => {
+    setCode(initialCode);
+  }, []);
+  // executed at runtime
+  async function showCode(url) {
+    try {
+      const res = await global.fetch(`${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/${url}`);
+      const newCode = await res.json();
+      setCode(JSON.stringify(newCode, null, 2));
+      setCurrentRequest(url);
+    } catch (error) {
+      console.error('Error: ', error.message);
+    }
+  }
+
   return (
     <div className="container mx-auto">
       <h1 className="text-center text-3xl pb-4">Try it now!</h1>
@@ -10,67 +29,47 @@ function RequestBox() {
         </span>
         <input
           type="text"
-          className="w-full py-2 px-1"
+          className="w-full py-2 px-1 text-gray-900"
           placeholder="people/1/"
+          onChange={(e) => setCurrentRequest(e.target.value)}
+          value={currentRequest}
         />
-        <button className="bg-gray-900 hover:bg-gray-700 text-white text-sm lg:text-base lg:font-bold py-2 px-4 rounded-r">
+        <button
+          onClick={() => showCode(currentRequest)}
+          className="bg-gray-900 hover:bg-gray-700 text-white text-sm lg:text-base lg:font-bold py-2 px-4 rounded-r">
           request
         </button>
       </div>
 
       <small>
         Need a hint? try{' '}
-        <a href="#">
-          <i>people/1/</i>
-        </a>{' '}
-        or{' '}
-        <a href="#">
-          <i>planets/3/</i>
-        </a>{' '}
-        or{' '}
-        <a href="#">
-          <i>starships/9/</i>
-        </a>
+        <button
+          onClick={() => showCode('people/1')}
+          className="underline italic font-bold"
+        >
+          people/1
+        </button>
+        {' or '}
+        <button
+          onClick={() => showCode('planets/3')}
+          className="underline italic font-bold"
+        >
+          planets/3
+        </button>
+        {' or '}
+        <button
+          onClick={() => showCode('starships/9')}
+          className="underline italic font-bold"
+        >
+          starships/9
+        </button>
       </small>
       <p className="text-xl mt-8">Result:</p>
       <div>
         <div className="relative overflow-hidden mb-8">
           <div className="rounded overflow-hidden border border-gray-400 p-4">
             <div className="overscroll-auto overflow-auto h-64 bg-gray-300 text-gray-700 p-4">
-              <pre className="overscroll-auto text-sm">
-                {`{
-    "name": "Luke Skywalker",
-    "height": "172",
-    "mass": "77",
-    "hair_color": "blond",
-    "skin_color": "fair",
-    "eye_color": "blue",
-    "birth_year": "19BBY",
-    "gender": "male",
-    "homeworld": "https://swapi.dev/api/planets/1/",
-    "films": [
-        "https://swapi.dev/api/films/2/",
-        "https://swapi.dev/api/films/6/",
-        "https://swapi.dev/api/films/3/",
-        "https://swapi.dev/api/films/1/",
-        "https://swapi.dev/api/films/7/"
-    ],
-    "species": [
-        "https://swapi.dev/api/species/1/"
-    ],
-    "vehicles": [
-        "https://swapi.dev/api/vehicles/14/",
-        "https://swapi.dev/api/vehicles/30/"
-    ],
-    "starships": [
-        "https://swapi.dev/api/starships/12/",
-        "https://swapi.dev/api/starships/22/"
-    ],
-    "created": "2014-12-09T13:50:51.644000Z",
-    "edited": "2014-12-20T21:17:56.891000Z",
-    "url": "https://swapi.dev/api/people/1/"
-}`}
-              </pre>
+              <pre className="overscroll-auto text-sm">{code}</pre>
             </div>
           </div>
         </div>
@@ -78,5 +77,9 @@ function RequestBox() {
     </div>
   );
 }
+
+RequestBox.propTypes = {
+  initialCode: PropTypes.string,
+};
 
 export default RequestBox;
