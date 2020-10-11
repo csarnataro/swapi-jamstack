@@ -1126,7 +1126,7 @@ Content-Type: application/json
                 There are a bunch of helper libraries available for consuming
                 the Star Wars API in a native programming language.
                 <img
-                  src="http://i.imgur.com/l02u363.gif"
+                  src="https://i.imgur.com/l02u363.gif"
                   alt="helper_library_gif"
                 ></img>
               </p>
