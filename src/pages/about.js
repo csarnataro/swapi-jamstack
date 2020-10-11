@@ -42,9 +42,9 @@ function AboutPage({ statistics }) {
             <h4 className="text-lg font-bold mb-2">Statistics</h4>
             <ul className="list-disc list-inside">
               {Object.keys(statistics).map((key) => (
-                  <li key={key}>
-                    <span>{key}</span>: <span>{statistics[key]}</span>
-                  </li>
+                <li key={key}>
+                  <span>{key}</span>: <span>{statistics[key]}</span>
+                </li>
               ))}
             </ul>
           </div>
@@ -148,15 +148,25 @@ for c in pm.get_characters().iter():
               </div>
               <div className="mb-8">
                 <h4 className="text-lg font-bold mb-2 mt-2">Who are you?</h4>
-                <p className="mb-2">{'// TODO'}</p>
-              </div>
-              <div className="mb-8">
-                <h4 className="text-lg font-bold mb-2 mt-2">
-                  Original author?
-                </h4>
                 <p className="mb-2">
-                  This project was originally built and maintained by Paul
-                  Hallett.
+                  <code className="text-sm font-mono text-orange-300">
+                    {'// original swapi.co'}
+                  </code>
+                  <br />
+                  I am Paul Hallett, a senior software engineer and an
+                  infinitely protean machine.
+                  <br />
+                  <code className="text-sm font-mono text-orange-300">
+                    {'// swapi.dev'}
+                  </code>
+                  <br />I am Juriy Bura, Solution Architect and author of
+                  JavaScript game development book and online React courses.
+                  <br />
+                  <code className="text-sm font-mono text-orange-300">
+                    {'// current JavaScript version'}
+                  </code>
+                  <br />I am Christian Sarnataro, a passionate web developer
+                  exploring the JamStack architecture.
                 </p>
               </div>
               <div className="mb-8">
