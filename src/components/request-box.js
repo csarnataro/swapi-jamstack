@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function RequestBox({ initialCode }) {
   const [code, setCode] = useState();
-  const [currentRequest, setCurrentRequest] = useState();
+  const [currentRequest, setCurrentRequest] = useState('');
 
   useEffect(() => {
     setCode(initialCode);
