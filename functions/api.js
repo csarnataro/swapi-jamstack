@@ -1,7 +1,9 @@
+/* eslint-disable prefer-rest-params */
 const serverless = require('serverless-http');
 const express = require('express');
 const cors = require('cors');
 const responseTimeMiddleware = require('./lib/response-time-middleware');
+const wookieMiddleware = require('./lib/wookiee-middleware');
 const { allFilms, singleFilm } = require('./handlers/films');
 const { allPeople, singlePerson } = require('./handlers/people');
 const { allPlanets, singlePlanet } = require('./handlers/planets');
@@ -14,6 +16,8 @@ const app = express();
 
 app.use(cors());
 app.use(responseTimeMiddleware);
+
+app.use(wookieMiddleware);
 
 app.get('/api', allResources);
 
