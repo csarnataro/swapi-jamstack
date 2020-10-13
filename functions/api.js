@@ -5,6 +5,7 @@ const cors = require('cors');
 const responseTimeMiddleware = require('./lib/response-time-middleware');
 const wookieMiddleware = require('./lib/wookiee-middleware');
 const { allFilms, singleFilm } = require('./handlers/films');
+const schema = require('./handlers/schema');
 const { allPeople, singlePerson } = require('./handlers/people');
 const { allPlanets, singlePlanet } = require('./handlers/planets');
 const { allSpecies, singleSpecies } = require('./handlers/species');
@@ -16,27 +17,32 @@ const app = express();
 
 app.use(cors());
 app.use(responseTimeMiddleware);
-
 app.use(wookieMiddleware);
 
 app.get('/api', allResources);
 
 app.get('/api/films', allFilms);
+app.get('/api/films/schema', schema('films'));
 app.get('/api/films/:id', singleFilm);
 
 app.get('/api/people', allPeople);
+app.get('/api/people/schema', schema('people'));
 app.get('/api/people/:id', singlePerson);
 
 app.get('/api/planets', allPlanets);
+app.get('/api/planets/schema', schema('planets'));
 app.get('/api/planets/:id', singlePlanet);
 
 app.get('/api/species', allSpecies);
+app.get('/api/species/schema', schema('species'));
 app.get('/api/species/:id', singleSpecies);
 
 app.get('/api/starships', allStarships);
+app.get('/api/starships/schema', schema('starships'));
 app.get('/api/starships/:id', singleStarship);
 
 app.get('/api/vehicles', allVehicles);
+app.get('/api/vehicles/schema', schema('vehicles'));
 app.get('/api/vehicles/:id', singleVehicle);
 
 app.get('/api/*', (req, res) => {
