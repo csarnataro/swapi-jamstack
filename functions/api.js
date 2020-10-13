@@ -39,6 +39,12 @@ app.get('/api/starships/:id', singleStarship);
 app.get('/api/vehicles', allVehicles);
 app.get('/api/vehicles/:id', singleVehicle);
 
+app.get('/api/*', (req, res) => {
+  res.status(404);
+  res.json({ detail: 'Not found' });
+  res.end();
+});
+
 app.get('/*', (req, res) => {
   res.write('It works');
   res.end();
