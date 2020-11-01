@@ -19,7 +19,8 @@
       "error",
       {
         "devDependencies": [
-          ".netlify/**/*.test.js"
+          ".netlify/**/*.test.js",
+          "__tests__/**/*.test.js"
         ]
       }
     ]
