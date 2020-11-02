@@ -33,7 +33,7 @@ function RequestBox({ initialCode }) {
         <input
           type="text"
           id="api"
-          className="w-full py-2 px-1 text-gray-900"
+          className="flex-grow py-2 px-1 text-gray-900"
           placeholder="people/1"
           onChange={(e) => setCurrentRequest(e.target.value)}
           value={currentRequest}
