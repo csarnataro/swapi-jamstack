@@ -9,13 +9,16 @@ function RequestBox({ initialCode }) {
     setCode(initialCode);
   }, []);
   // executed at runtime
-  async function showCode(url) {
+  async function showCode(resource) {
     try {
-      const res = await global.fetch(`${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/${url}`);
+      const fullUrl = `${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/${resource}`;
+      // eslint-disable-next-line no-undef
+      const res = await fetch(fullUrl);
       const newCode = await res.json();
       setCode(JSON.stringify(newCode, null, 2));
-      setCurrentRequest(url);
+      setCurrentRequest(resource);
     } catch (error) {
+      console.dir(error);
       console.error('Error: ', error.message);
     }
   }
@@ -25,12 +28,13 @@ function RequestBox({ initialCode }) {
       <h1 className="text-center text-3xl pb-4">Try it now!</h1>
       <div className="inline-flex w-full">
         <span className="bg-gray-700 text-white text-sm lg:text-base lg:font-bold py-2 pr-2 pl-4 rounded-l">
-          https://swapi.dev/api/
+          {`${process.env.NEXT_PUBLIC_API_SERVER_NAME}/`}
         </span>
         <input
           type="text"
-          className="w-full py-2 px-1 text-gray-900"
-          placeholder="people/1/"
+          id="api"
+          className="flex-grow py-2 px-1 text-gray-900"
+          placeholder="people/1"
           onChange={(e) => setCurrentRequest(e.target.value)}
           value={currentRequest}
         />
@@ -69,7 +73,9 @@ function RequestBox({ initialCode }) {
         <div className="relative overflow-hidden mb-8">
           <div className="rounded overflow-hidden border border-gray-400 p-4">
             <div className="overscroll-auto overflow-auto h-64 bg-gray-300 text-gray-700 p-4">
-              <pre className="overscroll-auto text-sm">{code}</pre>
+              <output role="result" htmlFor="api" className="overscroll-auto text-sm whitespace-pre font-mono">
+                {code}
+              </output>
             </div>
           </div>
         </div>

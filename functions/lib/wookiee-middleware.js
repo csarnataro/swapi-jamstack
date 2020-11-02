@@ -1,4 +1,4 @@
-const translateToWookiee = require('./wookiee-formatter');
+const translateToWookiee = require('shyriiwook');
 
 function wookieMiddleware(req, res, next) {
   if (req.query.format === 'wookiee') {

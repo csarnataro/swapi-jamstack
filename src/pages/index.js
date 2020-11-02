@@ -9,7 +9,8 @@ export async function getStaticProps() {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
   const serverName = process.env.NEXT_PUBLIC_API_SERVER_NAME;
-  const res = await global.fetch(`${serverName}/api/people/1`);
+  // eslint-disable-next-line no-undef
+  const res = await fetch(`${serverName}/api/people/1`);
   const initialCode = await res.json();
 
   // By returning { props: posts }, the Blog component
@@ -41,7 +42,7 @@ function HomePage({ initialCode }) {
         </div>
       </div>
       <div>
-        <RequestBox initialCode={initialCode} />
+        <RequestBox initialCode={initialCode || '...'} />
 
         <div className="container mx-auto text-center text-md pt-4 pb-12">
           <div className="grid grid-cols-3 gap-4">
