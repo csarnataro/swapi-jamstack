@@ -44,7 +44,21 @@ Navigate to `http://localhost:4000/api/films` for the JSON APIs
 
 Navigate to `http://localhost:3000/` for the human-friendly frontend
 
-### Tests (NOT IMPLEMENTED, YET)
+### Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+We're using [commitizen](https://github.com/commitizen/cz-cli) to enforce 
+[conventional commits](https://www.conventionalcommits.org/en/v1.0.0/).
+
+This means that when you're ready to commit you should use 
+
+``` bash
+npm run commit
+```
+
+### Tests
 
 ```
 npm run test
