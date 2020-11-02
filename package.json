@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "export": "next export",
-    "test": "jest"
+    "test": "jest",
+    "commit": "cz"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.2.0",
@@ -38,6 +39,7 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "babel-jest": "^26.5.2",
+    "commitizen": "^4.2.2",
     "eslint": "^7.9.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
