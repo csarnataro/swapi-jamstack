@@ -1,7 +1,4 @@
 import React from 'react';
-
-// import { rest } from 'msw';
-// import { setupServer } from 'msw/node';
 import fetch from 'jest-fetch-mock';
 import {
   fireEvent,
@@ -16,12 +13,6 @@ import RequestBox from '../../src/components/request-box';
 process.env.NEXT_PUBLIC_API_SERVER_NAME = 'http://localhost:4000';
 
 fetch.enableMocks();
-// const server = setupServer(
-//   rest.get('http://localhost:4000/api/people/1', (req, res, ctx) => {
-//     console.log('received request');
-//     return res(ctx.json({ edited: 'now' }));
-//   }),
-// );
 
 beforeAll(() => {
   fetch.mockIf(/^.*\/api\/.*$/, (req) => {
@@ -35,10 +26,6 @@ beforeAll(() => {
     return Promise.reject(new Error('bad url'));
   });
 });
-
-// beforeAll(() => server.listen());
-// afterEach(() => server.resetHandlers());
-// afterAll(() => server.close());
 
 test('loads and displays initial text', async () => {
   render(<RequestBox initialCode={'hello world'} />);
