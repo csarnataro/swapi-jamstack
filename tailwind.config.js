@@ -2,6 +2,12 @@ const tailwindTipography = require('@tailwindcss/typography');
 
 // tailwind.config.js
 module.exports = {
+  purge: {
+    mode: 'all',
+    content: [
+      './src/**/*.js',
+    ],
+  },
   theme: {
     typography: {
       default: {
