@@ -28,7 +28,7 @@ function RequestBox({ initialCode }) {
       <h1 className="text-center text-3xl pb-4">Try it now!</h1>
       <div className="inline-flex w-full">
         <span className="bg-gray-700 text-white text-sm lg:text-base lg:font-bold py-2 pr-2 pl-4 rounded-l">
-          {`${process.env.NEXT_PUBLIC_API_SERVER_NAME}/`}
+          {`${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/`}
         </span>
         <input
           type="text"

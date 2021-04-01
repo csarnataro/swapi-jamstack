@@ -1,7 +1,5 @@
 import React from 'react';
-import Head from 'next/head';
 import PropTypes from 'prop-types';
-// import fetch from 'node-fetch';
 import Layout from '../components/layout';
 import RequestBox from '../components/request-box';
 
@@ -24,14 +22,7 @@ export async function getStaticProps() {
 
 function HomePage({ initialCode }) {
   return (
-    <Layout currentPage="index">
-      <Head>
-        <title>SWAPI - The Star Wars API</title>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0"
-        ></meta>
-      </Head>
+    <Layout currentPage="index" seoTitle="Homepage">
       <div className="container mx-auto text-center text-md pt-4 pb-12">
         <div>
           All the Star Wars data you’ve ever wanted: Planets, Spaceships,

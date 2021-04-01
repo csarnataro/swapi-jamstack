@@ -1,5 +1,4 @@
 import React from 'react';
-import Head from 'next/head';
 
 import Layout from '../components/layout';
 import SidebarMenu from '../components/sidebar-menu';
@@ -64,13 +63,6 @@ const menu = [
 function DocsPage() {
   return (
     <Layout currentPage="documentation">
-      <Head>
-        <title>SWAPI - The Star Wars API</title>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0"
-        ></meta>
-      </Head>
       <div className="container mx-auto">
         <div className="flex flex-wrap md:flex-no-wrap">
           <SidebarMenu menu={menu} />

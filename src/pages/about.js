@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Head from 'next/head';
 
 import Layout from '../components/layout';
 
@@ -29,13 +28,6 @@ export async function getStaticProps() {
 function AboutPage({ statistics }) {
   return (
     <Layout currentPage="about">
-      <Head>
-        <title>SWAPI - The Star Wars API</title>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0"
-        ></meta>
-      </Head>
       <div className="container mx-auto">
         <div className="flex flex-wrap md:flex-no-wrap">
           <div className="px-4 py-2 m-2 md:w-48">
@@ -191,15 +183,13 @@ for c in pm.get_characters().iter():
                   SWAPI would not be possible without contributions from the
                   following people:
                 </p>
-                <p className="mb-2">
-                  <ul className="list-disc list-inside">
-                    <li>Paul Hallett</li>
-                    <li>Owen Hallett</li>
-                    <li>Carvilsi</li>
-                    <li>Andrea Stagi</li>
-                    <li>Juriy Bura</li>
-                  </ul>
-                </p>
+                <ul className="mb-2 list-disc list-inside">
+                  <li>Paul Hallett</li>
+                  <li>Owen Hallett</li>
+                  <li>Carvilsi</li>
+                  <li>Andrea Stagi</li>
+                  <li>Juriy Bura</li>
+                </ul>
               </div>
             </div>
           </div>
@@ -210,7 +200,7 @@ for c in pm.get_characters().iter():
 }
 
 AboutPage.propTypes = {
-  statistics: PropTypes.array,
+  statistics: PropTypes.object,
 };
 
 export default AboutPage;
