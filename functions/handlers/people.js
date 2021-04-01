@@ -42,16 +42,7 @@ const params = {
   },
 };
 
-
-function allPeople(req, res) {
-  all(params)(req, res);
-}
-
-function singlePerson(req, res) {
-  single(params)(req, res);
-}
-
 module.exports = {
-  allPeople,
-  singlePerson,
+  all: all(params),
+  single: single(params),
 };

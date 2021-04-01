@@ -1,61 +1,9 @@
-/* eslint-disable prefer-rest-params */
-const serverless = require('serverless-http');
-const express = require('express');
-const cors = require('cors');
-const responseTimeMiddleware = require('./lib/response-time-middleware');
-const wookieMiddleware = require('./lib/wookiee-middleware');
-const { allFilms, singleFilm } = require('./handlers/films');
-const schema = require('./handlers/schema');
-const { allPeople, singlePerson } = require('./handlers/people');
-const { allPlanets, singlePlanet } = require('./handlers/planets');
-const { allSpecies, singleSpecies } = require('./handlers/species');
-const allResources = require('./handlers/resources');
-const { allStarships, singleStarship } = require('./handlers/starships');
-const { allVehicles, singleVehicle } = require('./handlers/vehicles');
+/**
+ * Exports a handler to be used as a lambda function on Netlify (which is backed by AWS)
+ * @see https://www.fastify.io/docs/latest/Serverless/#lambdajs
+ */
+const awsLambdaFastify = require('aws-lambda-fastify');
+const init = require('./app');
 
-const app = express();
-
-app.use(cors());
-app.use(responseTimeMiddleware);
-app.use(wookieMiddleware);
-
-app.get('/api', allResources);
-
-app.get('/api/films', allFilms);
-app.get('/api/films/schema', schema('films'));
-app.get('/api/films/:id', singleFilm);
-
-app.get('/api/people', allPeople);
-app.get('/api/people/schema', schema('people'));
-app.get('/api/people/:id', singlePerson);
-
-app.get('/api/planets', allPlanets);
-app.get('/api/planets/schema', schema('planets'));
-app.get('/api/planets/:id', singlePlanet);
-
-app.get('/api/species', allSpecies);
-app.get('/api/species/schema', schema('species'));
-app.get('/api/species/:id', singleSpecies);
-
-app.get('/api/starships', allStarships);
-app.get('/api/starships/schema', schema('starships'));
-app.get('/api/starships/:id', singleStarship);
-
-app.get('/api/vehicles', allVehicles);
-app.get('/api/vehicles/schema', schema('vehicles'));
-app.get('/api/vehicles/:id', singleVehicle);
-
-app.get('/api/*', (req, res) => {
-  res.status(404);
-  res.json({ detail: 'Not found' });
-  res.end();
-});
-
-app.get('/*', (req, res) => {
-  res.write('It works');
-  res.end();
-});
-
-module.exports = {
-  handler: process.env.NODE_ENV === 'local' ? app : serverless(app),
-};
+const proxy = awsLambdaFastify(init());
+exports.handler = proxy;

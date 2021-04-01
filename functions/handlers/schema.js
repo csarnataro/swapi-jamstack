@@ -5,40 +5,24 @@ const species = require('../../schemas/species.json');
 const starships = require('../../schemas/starships.json');
 const vehicles = require('../../schemas/vehicles.json');
 
-function schema(prefix) {
-  /* for some reason, a dynamic require is not supported on netlify
-   * so we're creating this not-so-nice switch statement to determine
-   * the right entities to use based on the name
-   */
-  // const entities = require(`../../schemas/${prefix}.json`);
-
-  let jsonSchema = {};
-  switch (prefix) {
-    case 'films':
-      jsonSchema = films;
-      break;
-    case 'people':
-      jsonSchema = people;
-      break;
-    case 'planets':
-      jsonSchema = planets;
-      break;
-    case 'species':
-      jsonSchema = species;
-      break;
-    case 'starships':
-      jsonSchema = starships;
-      break;
-    case 'vehicles':
-      jsonSchema = vehicles;
-      break;
-    default:
-      break;
-  }
-
-
-  return function processRequest(req, res) {
-    return res.json(jsonSchema);
+const schemas = {
+  films,
+  people,
+  planets,
+  species,
+  starships,
+  vehicles,
+};
+/**
+ * Returns a fastify handler which sends a schema in JSON format, related to a spefic entity type
+ *
+ * @param {string} entityType the type of the entity for which we want to get the schema
+ * @returns {function} a handler which send a JSON related to a spefic schema
+ *
+ */
+function schema(entityType) {
+  return function processRequest(request, reply) {
+    return reply.send(schemas[entityType]);
   };
 }
 

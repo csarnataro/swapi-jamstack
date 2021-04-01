@@ -21,15 +21,7 @@ const params = {
   },
 };
 
-function allStarships(req, res) {
-  all(params)(req, res);
-}
-
-function singleStarship(req, res) {
-  single(params)(req, res);
-}
-
 module.exports = {
-  allStarships,
-  singleStarship,
+  all: all(params),
+  single: single(params),
 };

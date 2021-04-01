@@ -21,15 +21,7 @@ const params = {
   },
 };
 
-function allVehicles(req, res) {
-  all(params)(req, res);
-}
-
-function singleVehicle(req, res) {
-  single(params)(req, res);
-}
-
 module.exports = {
-  allVehicles,
-  singleVehicle,
+  all: all(params),
+  single: single(params),
 };

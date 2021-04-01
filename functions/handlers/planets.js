@@ -18,15 +18,7 @@ const params = {
   },
 };
 
-function allPlanets(req, res) {
-  all(params)(req, res);
-}
-
-function singlePlanet(req, res) {
-  single(params)(req, res);
-}
-
 module.exports = {
-  allPlanets,
-  singlePlanet,
+  all: all(params),
+  single: single(params),
 };

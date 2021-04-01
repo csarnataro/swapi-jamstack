@@ -1,7 +1,7 @@
 const getServerName = require('../lib/get-server-name');
 
 function allResources(req, res) {
-  res.json([
+  res.send([
     'people',
     'planets',
     'films',

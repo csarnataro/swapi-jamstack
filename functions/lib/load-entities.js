@@ -3,7 +3,7 @@ const buildResultPage = require('./build-result-page');
 const getServerName = require('./get-server-name');
 
 function all({ prefix, entities, backlinks }) {
-  return function processRequest(req, res) {
+  return function processRequest(req, reply) {
     const serverName = getServerName(req);
     const pageNumber = req.query.page || 1;
     try {
@@ -21,39 +21,36 @@ function all({ prefix, entities, backlinks }) {
           pageNumber: Number(pageNumber),
         },
       );
-      res.json(resultPage);
-      res.end();
+      reply.send(resultPage);
     } catch (e) {
       if (e instanceof RangeError) {
-        res.status(404);
-        res.json({ detail: e.message });
+        reply.status(404);
+        reply.send({ detail: e.message });
       } else {
-        res.status(500);
-        res.json({ detail: e.message });
+        reply.status(500);
+        reply.send({ detail: e.message });
       }
     }
   };
 }
 
 function single({ prefix, entities, backlinks }) {
-  return function processRequest(req, res) {
+  return function processRequest(req, reply) {
     const serverName = getServerName(req);
     const { id } = req.params;
     const foundEntity = entities.filter((_) => _.pk === parseInt(id, 10));
     if (foundEntity.length > 0) {
       const entity = foundEntity[0];
-      res.json(getModelFromDbEntity({
+      reply.send(getModelFromDbEntity({
         prefix,
         entity,
         serverName,
         backlinks,
       }));
     } else {
-      res.status(404);
-      res.json({ detail: 'Not found' });
+      reply.status(404);
+      reply.send({ detail: 'Not found' });
     }
-
-    res.end();
   };
 }
 module.exports = {
