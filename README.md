@@ -1,13 +1,13 @@
 # SWAPI serverless
 
->   A porting of [swapi.dev](https://swapi.dev) using JavaScript serverless 
-    functions for the JSON APIs and Next.js statically generated pages for the 
-    front-end.
+>   A porting of [swapi.co](https://swapi.co) using a JAMStack architecture,
+    with JavaScript serverless functions for the JSON APIs and Next.js 
+    statically generated pages for the front-end.
 
 ### Goals
-1.  Achieve feature parity of [swapi.dev](https://swapi.dev) site, (previously 
-    known as [swapi.co](swapi.co), not maintained anymore) as a JamStack site, 
-    with some back-end logic as serverless lambda functions
+1.  Achieve feature parity of original swapi.co (unmaintained) or 
+    [swapi.dev](https://swapi.dev) API, but using a JAMStack architecture, 
+    with back-end logic implemented by serverless lambda functions
 
 2.  Restore the original swapi.co site or build a brand new swapi site, possibly 
     hosted on [Netlify](www.netlify.com)
