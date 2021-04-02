@@ -60,7 +60,7 @@ typings/
 
 # gatsby files
 .cache/
-public
+# public # NOTE: this is a valid folder in Next.js
 
 # Mac files
 .DS_Store
@@ -75,3 +75,6 @@ yarn-error.log
 # NextJS build folder
 .next
 out/
+
+# Misc
+old/

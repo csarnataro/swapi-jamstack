@@ -20,4 +20,7 @@ body {
   width: 1px;
 }
 
+a[href] {
+  text-decoration: underline;
+}
 @tailwind utilities;

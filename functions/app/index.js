@@ -6,18 +6,18 @@ function init() {
   });
   // const responseTimeMiddleware = require('./lib/response-time-middleware');
 
-  const schema = require('./handlers/schema');
-  const filmsHandler = require('./handlers/films');
-  const peopleHanlder = require('./handlers/people');
-  const planetsHandler = require('./handlers/planets');
-  const speciesHandler = require('./handlers/species');
-  const allResources = require('./handlers/resources');
-  const starshipsHandler = require('./handlers/starships');
-  const vehiclesHandler = require('./handlers/vehicles');
+  const schema = require('../handlers/schema');
+  const filmsHandler = require('../handlers/films');
+  const peopleHanlder = require('../handlers/people');
+  const planetsHandler = require('../handlers/planets');
+  const speciesHandler = require('../handlers/species');
+  const allResources = require('../handlers/resources');
+  const starshipsHandler = require('../handlers/starships');
+  const vehiclesHandler = require('../handlers/vehicles');
 
   fastify.register(require('fastify-cors'));
   fastify.register(require('fastify-x-request-id'));
-  fastify.addHook('preSerialization', require('./lib/wookiee-hook'));
+  fastify.addHook('preSerialization', require('../lib/wookiee-hook'));
 
   fastify.get('/api', allResources);
 
