@@ -26,7 +26,7 @@ function HomePage({ initialCode }) {
     <Layout currentPage="index" seoTitle="Homepage">
       <div className="container mx-auto text-center text-md pt-4 pb-12">
         <div>
-          All the Star Wars data you’ve ever wanted: Planets, Spaceships,
+          An API with all the Star Wars data you’ve ever wanted: <br />Planets, Spaceships,
           Vehicles, People, Films and Species, from all SEVEN Star Wars films
         </div>
       </div>
