@@ -71,39 +71,22 @@ function createLinksForHomeWorld(model, serverName) {
   }
 }
 
-function createLinkForModel({ prefix, entityId, serverName }) {
-  return `${serverName}/api/${prefix}/${entityId}`;
+function createLinkForModel({ entityType, entityId, serverName }) {
+  return `${serverName}/api/${entityType}/${entityId}`;
 }
 
 function getModelFromDbEntity({
   entity,
-  prefix,
+  entityType,
   serverName,
   backlinks,
 }) {
-  const model = { ...entity.fields };
+  const model = {
+    ...entity.fields,
+    id: entity.pk,
+    url: createLinkForModel({ entityType, entityId: entity.pk, serverName }),
+  };
 
-  model.id = entity.pk;
-
-  // console.log(films);
-  // model.films = addFilms('characters', films, model.id);
-
-  model.url = createLinkForModel({ prefix, entityId: entity.pk, serverName });
-
-  /*
-    backlinks: {
-      films: {
-        collection: films,
-        field: 'characters',
-      },
-      species: {
-        collection: species,
-        field: 'people',
-
-      },
-    },
-
-  */
   if (backlinks) {
     const backlinksFields = Object.keys(backlinks);
     backlinksFields.forEach((collectionToSearch) => {
@@ -129,7 +112,7 @@ function getModelFromDbEntity({
   createLinksForCollections(model, serverName);
 
   // species and people need a custom link for "homeworld"
-  if (prefix === 'species' || prefix === 'people') {
+  if (entityType === 'species' || entityType === 'people') {
     createLinksForHomeWorld(model, serverName);
   }
 
