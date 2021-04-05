@@ -8,8 +8,13 @@ function Code({ inline, children }) {
 
   // need to override tailwind typography defaults
   const inlineStyle = inline
-    ? { padding: '2px 4px', color: '#c7254e' }
+    ? {
+      padding: '2px 4px', // forcing inline because of issues with 'prose' outer class
+      margin: '0 4px',
+      color: '#c7254e',
+    }
     : {};
+
   return (
     <pre style={inlineStyle} className={`${inlineCssClassName} `}>
       <code>{children}</code>

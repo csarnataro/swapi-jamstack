@@ -1,8 +1,9 @@
 import React from 'react';
 
+import Code from '../components/code';
+import ExternalLink from '../components/external-link';
 import Layout from '../components/layout';
 import SidebarMenu from '../components/sidebar-menu';
-import Code from '../components/code';
 import DocumentationResource from '../components/documentaton-resource';
 
 const menu = [
@@ -40,24 +41,6 @@ const menu = [
       { label: 'Planets', href: '#planets' },
     ],
   },
-  {
-    header: 'Helper libraries',
-    items: [
-      { label: 'Python', href: '#' },
-      { label: 'Javascript', href: '#' },
-      { label: 'Android', href: '#' },
-      { label: 'Java', href: '#' },
-      { label: 'Go', href: '#' },
-      { label: 'Ruby', href: '#' },
-      { label: 'C#', href: '#' },
-      { label: 'Objective C', href: '#' },
-      { label: 'Angular', href: '#' },
-      { label: 'Angular 2', href: '#' },
-      { label: 'R', href: '#' },
-      { label: 'F#', href: '#' },
-      { label: 'Elixir', href: '#' },
-    ],
-  },
 ];
 
 function DocsPage() {
@@ -75,23 +58,20 @@ function DocsPage() {
               <p>
                 Welcome to the swapi, the Star Wars API! This documentation
                 should help you familiarise yourself with the resources
-                available and how to consume them with HTTP requests. If you’re
-                after a native helper library then I suggest you scroll down and
-                check out what’s available. Read through the getting started
-                section before you dive in. Most of your problems should be
-                solved just by reading through it.{' '}
+                available and how to consume them with HTTP requests.
               </p>
               <a name="start" id="start"></a>
               <h4>Getting started</h4>
               <p>Let’s make our first API request to the Star Wars API!</p>
+              <p>Open up a terminal and use curl to make an API request for a resource.
+                In the example below, weʼre trying to get the first planet, Tatooine:
+              </p>
               <Code>
-                http {process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/planets/1/
+                $ curl {process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/planets/1
               </Code>
               <p>
-                We’ll use httpie for our examples as it displays responses
-                nicely and gives us a whole lot more useful information. If you
-                don’t want to download httpie, just use the curl command
-                instead.
+                We’re using curl for our examples, but you can use any http client of your choice.
+                For example, you can use <ExternalLink href="https://httpie.io/" label="httpie" />.
               </p>
               <p>
                 Here is the response we get:
@@ -130,29 +110,23 @@ Content-Type: application/json
                 response then check the Base URL first.
               </p>
               <p>The Base URL for swapi is:</p>
-              <Code>{process.env.NEXT_PUBLIC_API_SERVER_NAME}</Code>
+              <Code>{process.env.NEXT_PUBLIC_API_SERVER_NAME}/api</Code>
               <p>
                 The documentation below assumes you are prepending the Base URL
                 to the endpoints in order to make requests.
               </p>
               <a name="rate" id="rate"></a>
               <h4>Rate limiting</h4>
-              <p>{'// TODO'}</p>
               <p className="line-through">
-                Swapi has rate limiting to prevent malicious abuse (as if anyone
-                would abuse Star Wars data!) and to make sure our service can
-                handle a potentially large amount of traffic. Rate limiting is
-                done via IP address and is currently limited to 10,000 API
-                request per day. This is enough to request all the data on the
-                website at least ten times over. There should be no reason for
-                hitting the rate limit.
+                At the moment swapi is using a Netlify’s Starter account,
+                which provides generous amount of bandwidth and computing resources
+                for serverless functions (125 000 serverless function calls per month).
+                As such, restrictions may apply after the free quotas is used.
               </p>
               <h4>Authentication</h4>
               <p>
                 Swapi is a completely open API. No authentication is required to
-                query and get data. This also means that we’ve limited what you
-                can do to just GET-ing the data. If you find a mistake in the
-                data, then tweet the author or email him.
+                query and get data.
               </p>
               <a name="schema" id="schema"></a>
               <h4>JSON Schema</h4>
@@ -161,11 +135,14 @@ Content-Type: application/json
                 <Code inline>/api/&lt;resource&gt;/schema</Code> will give you
                 the details of that resource. This will allow you to
                 programmatically inspect the attributes of that resource and
-                their types.
+                their types.<br />
+                E.g.
+                <Code>{process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/planets/schema</Code>
               </p>
               <a name="search" id="search"></a>
               <h4>Searching</h4>
-              <p>
+              <p>{'// TODO: implement search'}</p>
+              <p className="line-through">
                 All resources support a <Code inline>search</Code> parameter
                 that filters the set of resources returned. This allows you to
                 make queries like:
@@ -192,11 +169,11 @@ Content-Type: application/json
               <h4>Wookiee</h4>
               Wookiee is for our tall hairy allies who speak Wookiee, this
               encoding is identical to JSON except with wookiee translations.
-              Using the wookiee renderer is easy, just append{' '}
-              <Code inline>?format=wookiee</Code> to your urls:{' '}
+              Using the wookiee renderer is easy, just append
+              <Code inline={true}>?format=wookiee</Code> to your urls:
               <Code>
-                {process.env.NEXT_PUBLIC_API_SERVER_NAME}
-                /api/planets/1/?format=wookiee
+                $ curl {process.env.NEXT_PUBLIC_API_SERVER_NAME}
+                /api/planets/1?format=wookiee
               </Code>
               <h3>Resources</h3>
               <hr />
@@ -205,7 +182,7 @@ Content-Type: application/json
                 title="Root"
                 description="The Root resource provides information on all available
                 resources within the API."
-                request={`http ${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api`}
+                request={`${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api`}
                 response={`HTTP/1.0 200 OK
 Content-Type: application/json
 {
@@ -268,35 +245,35 @@ Content-Type: application/json
                     description: 'view the JSON schema for this resource',
                   },
                 ]}
-                request={`http ${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/people/1`}
+                request={`${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/people/1`}
                 response={`HTTP/1.0 200 OK
 Content-Type: application/json
 {
     "birth_year": "19 BBY",
     "eye_color": "Blue",
     "films": [
-        "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/films/1/",
+        "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/films/1",
         ...
     ],
     "gender": "Male",
     "hair_color": "Blond",
     "height": "172",
-    "homeworld": "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/planets/1/",
+    "homeworld": "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/planets/1",
     "mass": "77",
     "name": "Luke Skywalker",
     "skin_color": "Fair",
     "created": "2014-12-09T13:50:51.644000Z",
     "edited": "2014-12-10T13:52:43.172000Z",
     "species": [
-        "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/species/1/"
+        "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/species/1"
     ],
     "starships": [
-        "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/starships/12/",
+        "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/starships/12",
         ...
     ],
-    "url": "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/people/1/",
+    "url": "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/people/1",
     "vehicles": [
-        "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/vehicles/14/"
+        "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/vehicles/14"
         ...
     ]
 }`}
@@ -398,7 +375,7 @@ Content-Type: application/json
               <DocumentationResource
                 title="Films"
                 anchor="films"
-                request={`http ${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/films/1`}
+                request={`${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/films/1`}
                 description="A Film resource is a single film."
                 endpoints={[
                   {
@@ -505,7 +482,7 @@ Content-Type: application/json
 Content-Type: application/json
 {
     "characters": [
-        "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/people/1/",
+        "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/people/1",
         ...
     ],
     "created": "2014-12-10T14:23:31.880000Z",
@@ -534,23 +511,23 @@ Content-Type: application/json
     people and restore\\n\\n
     freedom to the galaxy....",
     "planets": [
-        "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/planets/1/",
+        "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/planets/1",
         ...
     ],
     "producer": "Gary Kurtz, Rick McCallum",
     "release_date": "1977-05-25",
     "species": [
-        "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/species/1/",
+        "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/species/1",
         ...
     ],
     "starships": [
-        "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/starships/2/",
+        "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/starships/2",
         ...
     ],
     "title": "A New Hope",
-    "url": "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/films/1/",
+    "url": "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/films/1",
     "vehicles": [
-        "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/vehicles/4/",
+        "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/vehicles/4",
         ...
     ]
 }
@@ -575,7 +552,7 @@ Content-Type: application/json
                     description: 'view the JSON schema for this resource',
                   },
                 ]}
-                request={`http ${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/starships/9`}
+                request={`${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/starships/9`}
                 response={`HTTP/1.0 200 OK
 Content-Type: application/json
 {
@@ -594,11 +571,11 @@ Content-Type: application/json
     "name": "Death Star",
     "passengers": "843342",
     "films": [
-        "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/films/1/"
+        "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/films/1"
     ],
     "pilots": [],
     "starship_class": "Deep Space Mobile Battlestation",
-    "url": "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/starships/9/"
+    "url": "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/starships/9"
 }`}
                 attributes={[
                   {
@@ -745,9 +722,9 @@ Content-Type: application/json
     "passengers": "30",
     "pilots": [],
     "films": [
-        "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/films/1/"
+        "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/films/1"
     ],
-    "url": "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/vehicles/4/",
+    "url": "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/vehicles/4",
     "vehicle_class": "wheeled"
 }`}
                 attributes={[
@@ -879,18 +856,18 @@ Content-Type: application/json
     "edited": "2014-12-10T16:44:31.486000Z",
     "eye_colors": "blue, green, yellow, brown, golden, red",
     "hair_colors": "black, brown",
-    "homeworld": "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/planets/14/",
+    "homeworld": "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/planets/14",
     "language": "Shyriiwook",
     "name": "Wookie",
     "people": [
-        "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/people/13/"
+        "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/people/13"
     ],
     "films": [
-        "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/films/1/",
-        "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/films/2/"
+        "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/films/1",
+        "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/films/2"
     ],
     "skin_colors": "gray",
-    "url": "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/species/3/"
+    "url": "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/species/3"
 }`}
                 attributes={[
                   {
@@ -1012,7 +989,7 @@ Content-Type: application/json
     "diameter": "10465",
     "edited": "2014-12-15T13:48:16.167217Z",
     "films": [
-        "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/films/1/",
+        "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/films/1",
         ...
     ],
     "gravity": "1",
@@ -1020,13 +997,13 @@ Content-Type: application/json
     "orbital_period": "304",
     "population": "120000",
     "residents": [
-        "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/people/1/",
+        "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/people/1",
         ...
     ],
     "rotation_period": "23",
     "surface_water": "1",
     "terrain": "Dessert",
-    "url": "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/planets/1/"
+    "url": "${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/planets/1"
 }`}
                 attributes={[
                   {
@@ -1113,228 +1090,7 @@ Content-Type: application/json
                 ]}
                 searchFields={[{ name: 'name' }]}
               />
-              <h3>Helper libraries</h3>
-              <p>
-                There are a bunch of helper libraries available for consuming
-                the Star Wars API in a native programming language.
-                <img
-                  src="https://i.imgur.com/l02u363.gif"
-                  alt="helper_library_gif"
-                ></img>
-              </p>
-              <p>
-                <a name="python"></a>
-              </p>
-              <h4>Python</h4>
-              <ul>
-                <li>
-                  <a href="https://github.com/phalt/swapi-python">
-                    swapi-python
-                  </a>{' '}
-                  is built by the author of swapi, Paul Hallett.
-                </li>
-              </ul>
-              <p>
-                <a name="javascript"></a>
-              </p>
-              <h4>Javascript</h4>
-              <ul>
-                <li>
-                  <a href="https://github.com/cfjedimaster/SWAPI-Wrapper">
-                    SWAPI-Wrapper
-                  </a>{' '}
-                  By{' '}
-                  <a href="https://github.com/cfjedimaster">Raymond Camden</a>.
-                </li>
-                <li>
-                  <a href="https://www.npmjs.com/package/swapi-node">
-                    swapi-node
-                  </a>{' '}
-                  by <a href="https://github.com/lholmquist">Lucas Holmquist</a>
-                  .
-                </li>
-              </ul>
-              <p>
-                <a name="android"></a>
-              </p>
-              <h4>Android</h4>
-              <ul>
-                <li>
-                  <a href="https://github.com/Oleur/SWAPI-Android-SDK">
-                    SWAPI-Android-SDK
-                  </a>{' '}
-                  by <a href="https://github.com/Oleur">Julien Salvi</a>.
-                </li>
-              </ul>
-              <p>
-                <a name="java"></a>
-              </p>
-              <h4>Java</h4>
-              <ul>
-                <li>
-                  <a href="https://github.com/maartendekker1998/StarWarsAPI">
-                    SWAPI
-                  </a>{' '}
-                  by{' '}
-                  <a href="https://github.com/maartendekker1998">
-                    Maarten Dekker
-                  </a>
-                  .
-                </li>
-              </ul>
-              <p>
-                <a name="golang"></a>
-              </p>
-              <h4>Go</h4>
-              <ul>
-                <li>
-                  <a href="https://github.com/peterhellberg/swapi">swapi-go</a>{' '}
-                  by{' '}
-                  <a href="https://github.com/peterhellberg">Peter Hellberg</a>.
-                </li>
-                <li>
-                  <a href="https://github.com/leejarvis/swapi">swapi</a> by{' '}
-                  <a href="https://github.com/leejarvis">Lee Jarvis</a>.
-                </li>
-              </ul>
-              <p>
-                <a name="php"></a>
-              </p>
-              <h4>PHP</h4>
-              <ul>
-                <li>
-                  <a href="https://github.com/DraperStudio/Coruscant">
-                    Coruscant
-                  </a>{' '}
-                  by <a href="https://github.com/DraperStudio">DraperStudio</a>.
-                </li>
-                <li>
-                  <a href="https://github.com/rmasters/swapi-php">swapi-php</a>{' '}
-                  by <a href="https://github.com/rmasters">Ross Masters</a>.
-                </li>
-              </ul>
-              <p>
-                <a name="ruby"></a>
-              </p>
-              <h4>Ruby</h4>
-              <ul>
-                <li>
-                  <a href="https://github.com/emaraschio/swapi-ruby">
-                    swapi-ruby
-                  </a>{' '}
-                  by{' '}
-                  <a href="https://github.com/emaraschio">Ezequiel Maraschio</a>
-                  .
-                </li>
-                <li>
-                  <a href="https://github.com/philnash/tatooine">Tatooine</a> by{' '}
-                  <a href="https://github.com/philnash">Phil Nash</a>.
-                </li>
-                <li>
-                  <a href="https://github.com/igordcsouza/swgem">swgem</a> by{' '}
-                  <a href="https://github.com/igordcsouza">Igor Souza</a>.
-                </li>
-              </ul>
-              <p>
-                <a name="csharp"></a>
-              </p>
-              <h4>C Sharp</h4>
-              <ul>
-                <li>
-                  <a href="https://github.com/olcay/SharpTrooper">
-                    SharpTrooper
-                  </a>{' '}
-                  by <a href="https://github.com/olcay">Olcay Bayram</a>.
-                </li>
-                <li>
-                  <a href="https://github.com/M-Yankov/SWapi-CSharp">
-                    SWapiCSharp
-                  </a>{' '}
-                  by <a href="https://github.com/M-Yankov/">M-Yankov</a>
-                </li>
-              </ul>
-              <p>
-                <a name="objc"></a>
-              </p>
-              <h4>Objective C</h4>
-              <ul>
-                <li>
-                  <a href="https://github.com/njdehoog/Falcon">Falcon</a> by{' '}
-                  <a href="https://github.com/njdehoog">Niels de Hoog</a>.
-                </li>
-              </ul>
-              <p>
-                <a name="angular"></a>
-              </p>
-              <h4>Angular</h4>
-              <ul>
-                <li>
-                  <a href="https://github.com/unshift-devs/xyz-angular-swapi">
-                    xyz-angular-swapi
-                  </a>{' '}
-                  by <a href="https://github.com/cef62">Matteo Ronchi</a>.
-                </li>
-                <li>
-                  <a href="https://github.com/nickescallon/ne-swapi">
-                    ne-swapi
-                  </a>{' '}
-                  by <a href="https://github.com/nickescallon">Nick Escallon</a>
-                  .
-                </li>
-              </ul>
-              <p>
-                <a name="angular2"></a>
-              </p>
-              <h4>Angular 2</h4>
-              <ul>
-                <li>
-                  <a href="https://github.com/giammaleoni/ng2-swapi">
-                    ng2-swapi
-                  </a>{' '}
-                  by{' '}
-                  <a href="https://github.com/giammaleoni">Gianmaria Leoni</a>.
-                </li>
-              </ul>
-              <p>
-                <a name="r"></a>
-              </p>
-              <h4>R</h4>
-              <ul>
-                <li>
-                  <a href="https://github.com/Ironholds/rwars">rwars</a> by{' '}
-                  <a href="https://github.com/ironholds">Oliver Keyes</a>.
-                </li>
-              </ul>
-              <p>
-                <a name="fsharp"></a>
-              </p>
-              <h4>F#</h4>
-              <ul>
-                <li>
-                  <a href="https://github.com/evelinag/fsharp-swapi">
-                    fsharp-swapi
-                  </a>{' '}
-                  by <a href="http://evelinag.com/">Evelina Gabasova</a>.
-                </li>
-              </ul>
-              <h4>Elixir</h4>
-              <ul>
-                <li>
-                  <a href="https://github.com/twhitacre/swapi.ex">swapi.ex</a>{' '}
-                  by <a href="http://timw.co/">Tim Whitacre</a>.
-                </li>
-                <li>
-                  <a href="https://github.com/mrkjlchvz/ex_swapi">ex_swapi</a>{' '}
-                  by <a href="http://markjoelchavez.com">Mark Chavez</a>.
-                </li>
-                <li>
-                  <a href="https://github.com/kylesurowiec/swapi-elixir">
-                    elixir-swapi
-                  </a>{' '}
-                  by <a href="https://github.com/kylesurowiec">Kyle Surowiec</a>
-                  .
-                </li>
-              </ul>
+
             </div>
           </div>
         </div>

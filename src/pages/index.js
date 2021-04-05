@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import Layout from '../components/layout';
 import RequestBox from '../components/request-box';
+import ExternalLink from '../components/external-link';
 
 export async function getStaticProps() {
   // Call an external API endpoint to get posts.
@@ -38,7 +39,7 @@ function HomePage({ initialCode }) {
             <div>
               <h4 className="text-lg font-bold mb-2">What is this?</h4>
               <p>
-                The Star Wars API, or &ldquo;swapi&rdquo; (Swah-pee) is the
+                The Star Wars API, or &ldquo;swapi&rdquo; (swah-pee) is the
                 world’s first quantified and programmatically-accessible data
                 source for all the data from the Star Wars canon universe! We’ve
                 taken all the rich contextual stuff from the universe and
@@ -49,30 +50,34 @@ function HomePage({ initialCode }) {
               <h4 className="text-lg font-bold mb-2">How can I use it?</h4>
               <p>
                 All the data is accessible through our HTTP web API. Consult our
-                {' '}<Link href="/documentation"><a className="underline">documentation</a></Link> if you’d like to get started. Helper libraries for
-                popular programming languages are also provided so you can
-                consume swapi in your favourite programming language, in a style
-                that suits you.
+                {' '}<Link href="/documentation"><a className="underline">documentation</a></Link>
+                to get started.<br />
+                Swapi is perfect playground to get familiar with REST architectures
+                and for educational purpose.
               </p>
             </div>
 
             <div>
               <h4 className="text-lg font-bold mb-2">
-                What about the original swapi.co?
+                Why this API?
               </h4>
               <p>
-                The old swapi.co API is not maintained anymore. A fork
-                of the original Python project is maintained by Juriy Bura at
-                {' '}<a href="https://swapi.dev" rel="noreferrer" target="_blank">swapi.dev</a>.
+                This site and the underlying API are heavily inspired by
+                <ExternalLink href="https://github.com/phalt/swapi" label="swapi.co" />, which
+                is not maintained anymore. Many forks of the original repo exist.
+                E.g.
+                <ExternalLink href="https://swapi.dev" label="swapi.dev" />
+                or
+                <ExternalLink href="https://swapi.tech" label="swapi.tech" />.
                 This is a complete rewrite of the API and web site in JavaScript, using a
-                {' '}<a href="https://jamstack.org/" rel="noreferrer" target="_blank">JAMStack</a>{' '}
+                <ExternalLink href="https://jamstack.org/" label="JAMStack" />
                 architecture. Currently deployed on
-                {' '}<a href="https://www.netlify.com" rel="noreferrer" target="_blank">Netlify</a>,
+                <ExternalLink href="https://www.netlify.com" label="Netlify" />
                 using
-                {' '}<a href="https://nextjs.org/" rel="noreferrer" target="_blank">Next.js</a>{' '}and
-                {' '}<a href="https://www.fastify.io/" rel="noreferrer" target="_blank">fastify</a>.
+                <ExternalLink href="https://nextjs.org/" label="Next.js" /> and
+                <ExternalLink href="https://www.fastify.io/" label="fastify" />
                 This project is open source and you can contribute on
-                {' '}<a href="https://github.com/csarnataro/swapi-jamstack" rel="noreferrer" target="_blank">GitHub</a>.
+                <ExternalLink href="https://github.com/csarnataro/swapi-jamstack" label="GitHub" />
               </p>
             </div>
           </div>

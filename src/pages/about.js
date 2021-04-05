@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Link from 'next/link';
 
 import Layout from '../components/layout';
+import ExternalLink from '../components/external-link';
 
 import films from '../../data/films.json';
 import people from '../../data/people.json';
@@ -54,38 +56,49 @@ function AboutPage({ statistics }) {
               </p>
               <p className="mb-2">
                 We’ve formatted this data in JSON and exposed it to you in a
-                RESTish implementation that allows you to programmatically
+                <ExternalLink href="https://en.wikipedia.org/wiki/Representational_state_transfer" label="REST" />
+                implementation that allows you to programmatically
                 collect and measure the data.
               </p>
               <p className="mb-2">
-                Check out the documentation to get started consuming swapi data
+                Check out the <Link href="/documentation"><a>documentation</a></Link> to get started consuming swapi data
               </p>
             </div>
-            <div className="mb-8">
-              <h4 className="text-lg font-bold mb-2">
-                What happened to swapi.co?
-              </h4>
-              <p className="mb-2">
-                Unfortunately swapi.co is not maintained anymore, and the
-                service is currently down. This is an branch of SWAPI that will
-                be supported going forward.
-              </p>
-            </div>
-
             <div className="mb-4">
               <h4 className="text-lg font-bold mb-2">
                 What can you use this for?
               </h4>
               <p className="mb-2">
                 Comparing the data from Star Wars has never been easier. Here
-                are some examples using the Python helper library.
+                are some examples in plain JavaScript.
               </p>
-              <p className="italic mt-2">List the planets in order of size:</p>
+              <p className="italic mt-2">Get the planet with id = 1:</p>
               <div className="rounded overscroll-auto overflow-auto bg-gray-300 text-gray-700 p-4 border border-gray-400">
                 <pre className="overscroll-auto text-sm">
-                  {`import swapi
-for planet in swapi.get_all("planets").order_by("diameter"):
-    print(planet.name)`}
+                {`const fetch = require('node-fetch')
+
+fetch('https://www.swapi.it/api/planets/1')
+ .then(res => res.json())
+ .then(data => console.log(data))
+ .catch(err => console.error(err))
+`}
+                </pre>
+              </div>
+              <p className="italic mt-2">List the planets in order of size:</p>
+              <div className="mt-2 rounded overscroll-auto overflow-auto bg-gray-300 text-gray-700 p-4 border border-gray-400">
+                <pre className="overscroll-auto text-sm">
+                  {`const fetch = require('node-fetch')
+
+fetch('https://www.swapi.it/api/planets')
+ .then(res => res.json())
+ .then(planets => {
+    console.log([...planets.results.sort((a,b) => 
+      (parseInt(a.diameter) > parseInt(b.diameter)) 
+      ? 1 
+      : ((parseInt(b.diameter) > parseInt(a.diameter)) ? -1 : 0))])
+ })
+ .catch(err => console.error(err))
+`}
                 </pre>
               </div>
 
@@ -94,24 +107,16 @@ for planet in swapi.get_all("planets").order_by("diameter"):
               </p>
               <div className="rounded overscroll-auto overflow-auto bg-gray-300 text-gray-700 p-4 border border-gray-400">
                 <pre className="overscroll-auto text-sm">
-                  {`import swapi
-for people in swapi.get_all("people").iter():
-    if len(people.starships) > 1:
-        print(people.name)
+                  {`const fetch = require('node-fetch')
+
+fetch('https://www.swapi.it/api/people')
+  .then(res => res.json())
+  .then(people => {
+    console.log(people.results.filter(
+      person => person.starships.length > 1
+    ))
+})
 `}
-                </pre>
-              </div>
-              <p className="italic mt-2">
-                Discover if Jar Jar Binks ruined a film just by being in it:
-              </p>
-              <div className="rounded overscroll-auto overflow-auto bg-gray-300 text-gray-700 p-4 border border-gray-400">
-                <pre className="overscroll-auto text-sm">
-                  {`import swapi
-pm = swapi.get_film(4)
-jj = swapi.get_person(36)
-for c in pm.get_characters().iter():
-    if c.name == jj.name:
-        print("Why George, why.")`}
                 </pre>
               </div>
               <div className="my-8">
@@ -119,11 +124,8 @@ for c in pm.get_characters().iter():
                   What are the features?
                 </h4>
                 <p className="mb-2">
-                  <span className="line-through">
-                    We’re using Django and Django REST Framework
-                  </span>{' '}
                   We’re using JavaScript Lambda Serverless functions to serve a
-                  RESTishAPI to you. The data is all formatted in JSON and we
+                  REST API to you. The data is all formatted in JSON and we
                   also support JSON Schema for programmatically understanding
                   the attributes of each resource.
                 </p>
@@ -132,15 +134,16 @@ for c in pm.get_characters().iter():
                   statically pre-render all the pages in order to deploy the
                   whole site following the JamStack approach.
                 </p>
-                <p className="mb-2">
-                  After hours of watching films and trawling through content
-                  online, we present to you all the People, Films, Species,
-                  Starships, Vehicles and Planets from Star Wars.
-                </p>
               </div>
               <div className="mb-8">
                 <h4 className="text-lg font-bold mb-2 mt-2">Who are you?</h4>
                 <p className="mb-2">
+                  <code className="text-sm font-mono text-orange-300">
+                    {'// current JavaScript version'}
+                  </code>
+                  <br />I am Christian Sarnataro, a passionate web developer
+                  exploring the JamStack architecture.
+                  <br />
                   <code className="text-sm font-mono text-orange-300">
                     {'// original swapi.co'}
                   </code>
@@ -148,17 +151,6 @@ for c in pm.get_characters().iter():
                   I am Paul Hallett, a senior software engineer and an
                   infinitely protean machine.
                   <br />
-                  <code className="text-sm font-mono text-orange-300">
-                    {'// swapi.dev'}
-                  </code>
-                  <br />I am Juriy Bura, Solution Architect and author of
-                  JavaScript game development book and online React courses.
-                  <br />
-                  <code className="text-sm font-mono text-orange-300">
-                    {'// current JavaScript version'}
-                  </code>
-                  <br />I am Christian Sarnataro, a passionate web developer
-                  exploring the JamStack architecture.
                 </p>
               </div>
               <div className="mb-8">
@@ -174,9 +166,35 @@ for c in pm.get_characters().iter():
                 </p>
                 <p className="mb-2">
                   All data has been freely collected from open sources such as
-                  Wookiepedia.
+                  <ExternalLink href="https://starwars.fandom.com/wiki/Main_Page" label="Wookiepedia" />.
                 </p>
               </div>
+              <div className="mb-8">
+              <h4 className="text-lg font-bold mb-2">
+                What happened to swapi.co?
+              </h4>
+              <p className="mb-2">
+                Unfortunately swapi.co is not maintained anymore, and the
+                service is currently down.<br />
+                Inspired by this sentence in the readme file of the
+                {' '}<a href="https://github.com/Juriy/swapi" rel="noreferrer" target="_blank">swapi.dev</a> fork
+                <blockquote className="p-4 my-4 italic border-l-4 bg-neutral-100 text-neutral-600 border-neutral-500 quote">
+                  <p className="mb-2">
+                    original swapi project is built on Python/Django stack that is quite
+                    outdated by now.<br />
+                    It would be a great exercise to rewrite it in cloud-native manner</p>
+                </blockquote>
+                I decided to rewrite the API and the frontend pages in JavaScript, using the
+                JAMStack architecture and deploying it on Netlify.
+                <br />This is the result.
+                <br />
+                I cannot guarantee that this site will be maintained forever, but
+                for the moment is here as an exercise to explore the advantages of
+                the JAMStack architecture.
+              </p>
+            </div>
+
+
               <div className="mb-8">
                 <h4 className="text-lg font-bold mb-2 mt-2">Contributors</h4>
                 <p className="mb-2">
@@ -189,6 +207,7 @@ for c in pm.get_characters().iter():
                   <li>Carvilsi</li>
                   <li>Andrea Stagi</li>
                   <li>Juriy Bura</li>
+                  <li>Christian Sarnataro</li>
                 </ul>
               </div>
             </div>

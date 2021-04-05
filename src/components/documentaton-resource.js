@@ -34,7 +34,7 @@ function DocumentationResource({
       <p>
         Example request:
         {/* TODO: i would prefer to replace httpie with CURL, everywhere */}
-        <Code>http {request}</Code>
+        <Code>curl {request}</Code>
       </p>
       <p>
         Example response:
@@ -57,7 +57,7 @@ function DocumentationResource({
       )}
 
       {searchFields ? (
-        <p>
+        <p className="line-through">
           Search Fields:
           <ul>
             {searchFields.map((searchField) => (
