@@ -4,8 +4,8 @@
   "description": "A porting of swapi.dev (previously known as swapi.co) to serverless js functions",
   "main": "index.js",
   "scripts": {
-    "dev": "next dev & nodemon ./functions/app/index.js",
-    "start:api": "nodemon ./functions/app/index.js",
+    "dev": "next dev & nodemon ./functions/app/app.js",
+    "start:api": "nodemon ./functions/app/app.js",
     "build": "next build",
     "start": "next start",
     "export": "next export",
