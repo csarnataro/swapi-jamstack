@@ -1,10 +1,10 @@
 const planets = require('../../data/planets.json');
 const films = require('../../data/films.json');
 const people = require('../../data/people.json');
-const { all, single } = require('../lib/load-entities');
+const commonRoutes = require('./common-routes');
 
 const params = {
-  prefix: 'planets',
+  entityType: 'planets',
   entities: planets,
   backlinks: {
     films: {
@@ -18,7 +18,8 @@ const params = {
   },
 };
 
-module.exports = {
-  all: all(params),
-  single: single(params),
-};
+async function routes(fastify) {
+  commonRoutes(fastify, params);
+}
+
+module.exports = routes;

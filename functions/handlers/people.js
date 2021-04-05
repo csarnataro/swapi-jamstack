@@ -5,8 +5,8 @@ const vehiclesTable = require('../../data/vehicles.json');
 const starshipsTable = require('../../data/starships.json');
 const transportsTable = require('../../data/transport.json');
 
-const { all, single } = require('../lib/load-entities');
 const mergeVehiclesWithTransport = require('../lib/merge-vehicles-with-transport');
+const commonRoutes = require('./common-routes');
 
 const vehicles = mergeVehiclesWithTransport({
   allVehicles: vehiclesTable,
@@ -20,7 +20,7 @@ const starships = mergeVehiclesWithTransport({
 
 
 const params = {
-  prefix: 'people',
+  entityType: 'people',
   entities: people,
   backlinks: {
     films: {
@@ -42,7 +42,8 @@ const params = {
   },
 };
 
-module.exports = {
-  all: all(params),
-  single: single(params),
-};
+async function routes(fastify) {
+  commonRoutes(fastify, params);
+}
+
+module.exports = routes;
