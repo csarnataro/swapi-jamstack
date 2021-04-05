@@ -2,20 +2,20 @@ const getModelFromDbEntity = require('./transform-model');
 const buildResultPage = require('./build-result-page');
 const getServerName = require('./get-server-name');
 
-function all({ prefix, entities, backlinks }) {
+function all({ entityType, entities, backlinks }) {
   return function processRequest(req, reply) {
     const serverName = getServerName(req);
     const pageNumber = req.query.page || 1;
     try {
       const transformedModels = entities.map((entity) => getModelFromDbEntity({
-        prefix,
+        entityType,
         entity,
         serverName,
         backlinks,
       }));
       const resultPage = buildResultPage(
         {
-          prefix,
+          entityType,
           models: transformedModels,
           serverName,
           pageNumber: Number(pageNumber),
@@ -34,7 +34,7 @@ function all({ prefix, entities, backlinks }) {
   };
 }
 
-function single({ prefix, entities, backlinks }) {
+function single({ entityType, entities, backlinks }) {
   return function processRequest(req, reply) {
     const serverName = getServerName(req);
     const { id } = req.params;
@@ -42,7 +42,7 @@ function single({ prefix, entities, backlinks }) {
     if (foundEntity.length > 0) {
       const entity = foundEntity[0];
       reply.send(getModelFromDbEntity({
-        prefix,
+        entityType,
         entity,
         serverName,
         backlinks,

@@ -3,10 +3,10 @@ const getPage = require('./get-page');
 
 function createPageLink({
   serverName,
-  prefix,
+  entityType,
   pageNumber,
 }) {
-  return `${serverName}/api/${prefix}?page=${pageNumber}`;
+  return `${serverName}/api/${entityType}?page=${pageNumber}`;
 }
 
 /**
@@ -25,7 +25,7 @@ function createPageLink({
  * @returns {*} an object as described above
  */
 function buildResultPage({
-  prefix,
+  entityType,
   models,
   serverName,
   pageNumber,
@@ -39,7 +39,7 @@ function buildResultPage({
   if (pageNumber !== 1) {
     previous = createPageLink({
       serverName,
-      prefix,
+      entityType,
       pageNumber: pageNumber - 1,
     });
   }
@@ -47,7 +47,7 @@ function buildResultPage({
   if (resultPage.length >= PAGE_SIZE) {
     next = createPageLink({
       serverName,
-      prefix,
+      entityType,
       pageNumber: pageNumber + 1,
     });
   }

@@ -4,47 +4,21 @@ function init() {
     logger: true,
     requestIdHeader: 'X-Request-ID',
   });
-  // const responseTimeMiddleware = require('./lib/response-time-middleware');
-
-  const schema = require('../handlers/schema');
-  const filmsHandler = require('../handlers/films');
-  const peopleHanlder = require('../handlers/people');
-  const planetsHandler = require('../handlers/planets');
-  const speciesHandler = require('../handlers/species');
-  const allResources = require('../handlers/resources');
-  const starshipsHandler = require('../handlers/starships');
-  const vehiclesHandler = require('../handlers/vehicles');
-
   fastify.register(require('fastify-cors'));
   fastify.register(require('fastify-x-request-id'));
   fastify.addHook('preSerialization', require('../lib/wookiee-hook'));
 
-  fastify.get('/api', allResources);
+  fastify.get('/api', require('../handlers/resources'));
 
-  fastify.get('/api/films', filmsHandler.all);
-  fastify.get('/api/films/schema', schema('films'));
-  fastify.get('/api/films/:id', filmsHandler.single);
-
-  fastify.get('/api/people', peopleHanlder.all);
-  fastify.get('/api/people/schema', schema('people'));
-  fastify.get('/api/people/:id', peopleHanlder.single);
-
-  fastify.get('/api/planets', planetsHandler.all);
-  fastify.get('/api/planets/schema', schema('planets'));
-  fastify.get('/api/planets/:id', planetsHandler.single);
-
-  fastify.get('/api/species', speciesHandler.all);
-  fastify.get('/api/species/schema', schema('species'));
-  fastify.get('/api/species/:id', speciesHandler.single);
-
-  // fastify.use(responseTimeMiddleware);
-  fastify.get('/api/starships', starshipsHandler.all);
-  fastify.get('/api/starships/schema', schema('starships'));
-  fastify.get('/api/starships/:id', starshipsHandler.single);
-
-  fastify.get('/api/vehicles', vehiclesHandler.all);
-  fastify.get('/api/vehicles/schema', schema('vehicles'));
-  fastify.get('/api/vehicles/:id', vehiclesHandler.single);
+  /* API for all entity types, e.g.
+   * /api/films, /api/films/schema, /api/films/schema
+   */
+  fastify.register(require('../handlers/films'));
+  fastify.register(require('../handlers/people'));
+  fastify.register(require('../handlers/planets'));
+  fastify.register(require('../handlers/species'));
+  fastify.register(require('../handlers/starships'));
+  fastify.register(require('../handlers/vehicles'));
 
   fastify.get('/api/*', (req, reply) => {
     reply.code(404);
@@ -56,7 +30,6 @@ function init() {
     reply.send('It works');
     reply.end();
   });
-
 
   return fastify;
 }

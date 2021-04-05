@@ -9,10 +9,10 @@ function allResources(req, res) {
     'vehicles',
     'starships',
   ].reduce(
-    (accumulator, prefix) => (
+    (accumulator, entityType) => (
       {
         ...accumulator,
-        [prefix]: `${getServerName(req)}/api/${prefix}`,
+        [entityType]: `${getServerName(req)}/api/${entityType}`,
       }),
     {}, // <- initial value
   ));
