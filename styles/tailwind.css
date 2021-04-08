@@ -20,7 +20,8 @@ body {
   width: 1px;
 }
 
-a[href] {
+a[rel=noreferrer] {
   text-decoration: underline;
 }
+
 @tailwind utilities;

@@ -9,9 +9,21 @@ module.exports = {
     ],
   },
   theme: {
-    typography: {
+    typography: (theme) => ({
       default: {
         css: {
+          '.comment': {
+            color: theme('colors.orange.300'),
+            '&::before': {
+              content: '\'\'',
+            },
+            '&::after': {
+              content: '\'\'',
+            },
+          },
+          blockquote: {
+            color: 'rgb(226, 232, 240)',
+          },
           hr: {
             marginBottom: '0.5rem',
           },
@@ -41,7 +53,7 @@ module.exports = {
           },
         },
       },
-    },
+    }),
   },
   plugins: [tailwindTipography],
 };

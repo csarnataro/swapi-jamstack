@@ -24,7 +24,7 @@ import SidebarMenuSection from './sidebar-menu-section';
 
 function SidebarMenu({ menu }) {
   return (
-        <nav className='px-4 py-4 md:w-64'>
+        <nav className='px-4 py-4 md:w-64 w-full'>
           {menu.map((section) => <SidebarMenuSection
             key={section.header}
             header={section.header}
