@@ -24,28 +24,28 @@ function RequestBox({ initialCode }) {
   }
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto max-w-prose">
       <h1 className="text-center text-3xl pb-4">Try it now!</h1>
-      <div className="inline-flex w-full">
-        <span className="bg-gray-700 text-white text-sm lg:text-base lg:font-bold py-2 pr-2 pl-4 rounded-l">
+      <div className="flex px-1">
+        <span className="bg-gray-700 text-white text-sm lg:text-base lg:font-bold py-2 pr-1 md:pr-2 pl-1 md:pl-4 rounded-l">
           {`${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/`}
         </span>
         <input
           type="text"
           id="api"
-          className="flex-grow py-2 px-1 text-gray-900"
+          className="flex-grow py-2 px-0.5 md:px-1 text-gray-900 w-32"
           placeholder="people/1"
           onChange={(e) => setCurrentRequest(e.target.value)}
           value={currentRequest}
         />
         <button
           onClick={() => showCode(currentRequest)}
-          className="bg-gray-900 hover:bg-gray-700 text-white text-sm lg:text-base lg:font-bold py-2 px-4 rounded-r">
+          className="bg-gray-900 hover:bg-gray-700 text-white text-sm lg:text-base lg:font-bold py-2 px-1 md:px-4 rounded-r">
           request
         </button>
       </div>
 
-      <small>
+      <small className="px-1">
         Need a hint? try{' '}
         <button
           onClick={() => showCode('people/1')}
@@ -68,12 +68,12 @@ function RequestBox({ initialCode }) {
           starships/9
         </button>
       </small>
-      <p className="text-xl mt-8">Result:</p>
-      <div>
+      <p className="text-xl mt-8 px-1">Result:</p>
+      <div className="px-1">
         <div className="relative overflow-hidden mb-8">
           <div className="rounded overflow-hidden border border-gray-400 p-4">
             <div className="overscroll-auto overflow-auto h-64 bg-gray-300 text-gray-700 p-4">
-              <output role="result" htmlFor="api" className="overscroll-auto text-sm whitespace-pre font-mono">
+              <output role="result" style={{ whiteSpace: 'pre-wrap' }} htmlFor="api" className="overscroll-auto text-sm whitespace-pre font-mono">
                 {code}
               </output>
             </div>

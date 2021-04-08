@@ -34,8 +34,8 @@ function HomePage({ initialCode }) {
       <div>
         <RequestBox initialCode={initialCode || '...'} />
 
-        <div className="container mx-auto text-center text-md pt-4 pb-12">
-          <div className="grid grid-cols-3 gap-4">
+        <div className="container mx-auto text-center text-md pt-4 pb-12 px-2">
+          <div className="grid grid-col-1 md:grid-cols-3 gap-4">
             <div>
               <h4 className="text-lg font-bold mb-2">What is this?</h4>
               <p>

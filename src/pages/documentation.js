@@ -97,6 +97,7 @@ Content-Type: application/json
 }`}
                 </Code>
               </p>
+
               <p>
                 If your response looks slightly different don’t panic. This is
                 probably because more data has been added to swapi since we made
@@ -1090,7 +1091,10 @@ Content-Type: application/json
                 ]}
                 searchFields={[{ name: 'name' }]}
               />
+                            {/*
 
+
+            */}
             </div>
           </div>
         </div>

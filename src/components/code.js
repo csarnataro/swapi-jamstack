@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 function Code({ inline, children }) {
   const inlineCssClassName = inline
     ? 'inline'
-    : 'block text-sm border p-2 bg-gray-200 mt-2 mb-2 text-gray-900';
+    : 'block text-xs md:text-sm border p-2 bg-gray-200 mt-2 mb-2 text-gray-900';
 
   // need to override tailwind typography defaults
   const inlineStyle = inline
@@ -13,10 +13,12 @@ function Code({ inline, children }) {
       margin: '0 4px',
       color: '#c7254e',
     }
-    : {};
+    : {
+      whiteSpace: 'pre-wrap',
+    };
 
   return (
-    <pre style={inlineStyle} className={`${inlineCssClassName} `}>
+    <pre style={inlineStyle} className={inlineCssClassName}>
       <code>{children}</code>
     </pre>
   );
