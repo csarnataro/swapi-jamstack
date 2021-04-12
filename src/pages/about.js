@@ -17,12 +17,12 @@ export async function getStaticProps() {
   return {
     props: {
       statistics: {
-        People: people.length,
-        Planets: planets.length,
-        Films: films.length,
-        Species: species.length,
-        Vehicles: vehicles.length,
-        Starships: starships.length,
+        people: people.length,
+        planets: planets.length,
+        films: films.length,
+        species: species.length,
+        vehicles: vehicles.length,
+        starships: starships.length,
       },
     }, // will be passed to the page component as props
   };
@@ -38,7 +38,12 @@ function AboutPage({ statistics }) {
             <ul className="list-disc list-inside">
               {Object.keys(statistics).map((key) => (
                 <li key={key}>
-                  <span>{key}</span>: <span>{statistics[key]}</span>
+                  <span>
+                    <ExternalLink
+                      href={`${process.env.NEXT_PUBLIC_API_SERVER_NAME}/api/${key}`}
+                      label={`${key[0].toUpperCase()}${key.slice(1)}`}
+                    />
+                  </span>: <span>{statistics[key]}</span>
                 </li>
               ))}
             </ul>
@@ -197,13 +202,13 @@ fetch('https://www.swapi.it/api/people')
                   SWAPI would not be possible without contributions from the
                   following people:
                 </p>
-                <ul className="mb-2 list-disc list-inside">
-                  <li>Paul Hallett</li>
-                  <li>Owen Hallett</li>
-                  <li>Carvilsi</li>
-                  <li>Andrea Stagi</li>
-                  <li>Juriy Bura</li>
-                  <li>Christian Sarnataro</li>
+                <ul className="mb-2">
+                  <li><ExternalLink href="https://github.com/phalt/" label="Paul Hallett" /></li>
+                  <li><ExternalLink href="https://github.com/Videocard" label="Owen Hallett" /></li>
+                  <li><ExternalLink href="https://github.com/carvilsi" label="Carvilsi" /></li>
+                  <li><ExternalLink href="https://github.com/astagi" label="Andrea Stagi" /></li>
+                  <li><ExternalLink href="https://github.com/juriy" label="Juriy Bura" /></li>
+                  <li><ExternalLink href="https://github.com/csarnataro" label="Christian Sarnataro" /></li>
                 </ul>
               </div>
             </div>
