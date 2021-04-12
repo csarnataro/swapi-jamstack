@@ -4,6 +4,16 @@ function init() {
     logger: true,
     requestIdHeader: 'X-Request-ID',
   });
+  const fastifyCaching = require('fastify-caching');
+
+  fastify.register(
+    fastifyCaching,
+    {
+      expiresIn: 15 * 60,
+      privacy: fastifyCaching.privacy.PUBLIC,
+    },
+    (err) => { if (err) throw err; },
+  );
   fastify.register(require('fastify-cors'));
   fastify.register(require('fastify-x-request-id'));
   fastify.addHook('preSerialization', require('../lib/wookiee-hook'));
