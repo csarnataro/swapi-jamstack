@@ -18,6 +18,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "fastify": "^3.13.0",
+    "fastify-caching": "^6.1.0",
     "fastify-cors": "^5.2.0",
     "fastify-x-request-id": "^1.2.0",
     "next": "^10.1.2",
