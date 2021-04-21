@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import NavigationItem from './navigation-item';
+import ExternalLink from './external-link';
 
 function Navigation({ currentPage }) {
   const [open, setOpen] = useState(false);
@@ -20,28 +21,48 @@ function Navigation({ currentPage }) {
             </svg>
           </button>
         </div>
-        <nav className={`${open ? 'flex' : 'hidden'} flex-col flex-grow pb-4 md:pb-0 md:flex md:flex-row sm:items-stretch sm:justify-start`}>
-          <NavigationItem
-            href="/"
-            alt="Link to home page"
-            isActive={currentPage === 'index'}
-          >
-            Home
-          </NavigationItem>
-          <NavigationItem
-            href="/about"
-            alt="Link to about page"
-            isActive={currentPage === 'about'}
-          >
-            About
-          </NavigationItem>
-          <NavigationItem
-            href="/documentation"
-            alt="Link to documentation page"
-            isActive={currentPage === 'documentation'}
-          >
-            Documentation
-          </NavigationItem>
+        <nav className={`${open ? 'flex' : 'hidden'} flex-col flex-grow md:flex md:flex-row sm:items-stretch sm:justify-start`}>
+          <div className="flex flex-col flex-grow md:pb-2 md:pt-2 md:flex md:flex-row sm:items-stretch sm:justify-start">
+            <NavigationItem
+              href="/"
+              alt="Link to home page"
+              isActive={currentPage === 'index'}
+            >
+              Home
+            </NavigationItem>
+            <NavigationItem
+              href="/about"
+              alt="Link to about page"
+              isActive={currentPage === 'about'}
+            >
+              About
+            </NavigationItem>
+            <NavigationItem
+              href="/documentation"
+              alt="Link to documentation page"
+              isActive={currentPage === 'documentation'}
+            >
+              Documentation
+            </NavigationItem>
+          </div>
+          <div className="pb-4 md:pt-2 md:mt-2">
+            <a
+              className="hover:text-white hover:bg-gray-700 focus:bg-gray-700 px-3 py-2 no-underline md:underline text-gray-800 md:text-white rounded-md text-sm font-medium leading-5 focus:outline-none transition duration-150 ease-in-out"
+              href="https://www.github.com/csarnataro/swapi-jamstack"
+              rel="noreferrer"
+              target="_blank">
+              GitHub
+              <svg className="inline-block ml-2" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15">
+                <path
+                  fill="currentColor"
+                  d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,
+                    0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path>
+                <polygon
+                  fill="currentColor"
+                  points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,
+                    14.9 62.8,22.9 71.5,22.9"></polygon></svg>
+            </a>
+          </div>
         </nav>
       </div>
     </div>
