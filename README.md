@@ -1,7 +1,7 @@
 # SWAPI serverless
 
 >   A porting of [swapi.co](https://swapi.co) using a JAMStack architecture,
-    with JavaScript serverless functions for the JSON APIs and Next.js 
+    with JavaScript serverless functions (implemented through [fastify](https://fastify.io)) for the JSON APIs and Next.js 
     statically generated pages for the front-end.
 
 ### Goals
