@@ -82,7 +82,7 @@ function AboutPage({ statistics }) {
               <Code>
                 {`const fetch = require('node-fetch')
 
-fetch('https://www.swapi.it/api/planets/1')
+fetch('https://swapi-io.netlify.app/api/planets/1')
  .then(res => res.json())
  .then(data => console.log(data))
  .catch(err => console.error(err))
@@ -92,7 +92,7 @@ fetch('https://www.swapi.it/api/planets/1')
               <Code>
                 {`const fetch = require('node-fetch')
 
-fetch('https://www.swapi.it/api/planets')
+fetch('https://swapi-io.netlify.app/api/planets')
  .then(res => res.json())
  .then(planets => {
     console.log([...planets.results.sort((a,b) => 
@@ -110,7 +110,7 @@ fetch('https://www.swapi.it/api/planets')
               <Code>
                 {`const fetch = require('node-fetch')
 
-fetch('https://www.swapi.it/api/people')
+fetch('https://swapi-io.netlify.app/api/people')
   .then(res => res.json())
   .then(people => {
     console.log(people.results.filter(
