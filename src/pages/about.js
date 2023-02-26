@@ -67,7 +67,7 @@ function AboutPage({ statistics }) {
                 collect and measure the data.
               </p>
               <p className="mb-2">
-                Check out the <Link href="/documentation"><a>documentation</a></Link> to get started consuming swapi data
+                Check out the <Link href="/documentation">documentation</Link> to get started consuming swapi data
               </p>
             </div>
             <div className="mb-4">

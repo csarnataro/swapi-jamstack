@@ -18,8 +18,7 @@ function SidebarMenuSection({ header, items }) {
         <div className='text-lg font-bold my-2'>{header}</div>
         <ul>
             {items.map((item, index) => <li key={item.href}>
-                <Link href={item.href}>
-                    <a className={`
+                <Link href={item.href} className={`
                         ${getFirstAndLastItemClass(index, items.length)}
                         border-black
                         border-l
@@ -29,7 +28,7 @@ function SidebarMenuSection({ header, items }) {
                         p-2
                         w-full
                         block
-                    `}>{item.label}</a>
+                    `}>{item.label}
                 </Link>
             </li>)}
         </ul>

@@ -9,15 +9,13 @@ function NavigationItem({
   children, href, alt, isActive,
 }) {
   return (
-    <Link href={href}>
-      <a
+    <Link href={href}
         alt={alt}
         className={`${
           isActive ? activeClass : inactiveClass
         } px-3 py-2 no-underline md:underline text-gray-800 md:text-white rounded-md text-sm font-medium leading-5 focus:outline-none transition duration-150 ease-in-out`}
       >
         {children}
-      </a>
     </Link>
   );
 }
