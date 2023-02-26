@@ -50,7 +50,7 @@ function HomePage({ initialCode }) {
               <h4 className="text-lg font-bold mb-2">How can I use it?</h4>
               <p>
                 All the data is accessible through our HTTP web API. Consult our
-                {' '}<Link href="/documentation"><a className="underline">documentation</a></Link>{' '}
+                {' '}<Link href="/documentation" className="underline">documentation</Link>{' '}
                 to get started.<br />
                 Swapi is the perfect playground to get familiar with REST architectures
                 and for educational purpose.
